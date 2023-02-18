@@ -1,0 +1,10 @@
+{
+  "name": "@trymonorepo/shared-components",
+  "version": "1.0.0",
+  "main": "src",
+  "license": "MIT",
+  "dependencies": {
+    "react": "18.1.0",
+    "react-native": "0.70.6"
+  }
+}

@@ -143,3 +143,20 @@ Now we need to remove the whole root `node_modules` folder and reinstall them to
 `rm -rf node_modules`
 `yarn`
 Then we could run android and do a recursive test on ios.
+
+# Add a shared-components package
+
+`cd packages`
+`mkdir shared-components`
+`cd packages/shared-components`
+`yarn init -y`
+
+And we need to add `shared-components` to `metro.config.js` of both `mobile-app` and `buddy-app`, and the `watchFolders` should look like
+```
+module.exports = {
+  watchFolders: [
+    path.resolve(__dirname, '../../node_modules'),
+    path.resolve(__dirname, '../shared-components'),
+  ],
+};
+```

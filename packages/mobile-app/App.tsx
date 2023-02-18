@@ -14,7 +14,6 @@ import {
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
   useColorScheme,
   View,
 } from 'react-native';
@@ -27,6 +26,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import {SharedText} from '@trymonorepo/shared-components';
+
 const Section: React.FC<
   PropsWithChildren<{
     title: string;
@@ -35,7 +36,7 @@ const Section: React.FC<
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
-      <Text
+      <SharedText
         style={[
           styles.sectionTitle,
           {
@@ -43,8 +44,8 @@ const Section: React.FC<
           },
         ]}>
         {title}
-      </Text>
-      <Text
+      </SharedText>
+      <SharedText
         style={[
           styles.sectionDescription,
           {
@@ -52,7 +53,7 @@ const Section: React.FC<
           },
         ]}>
         {children}
-      </Text>
+      </SharedText>
     </View>
   );
 };
@@ -79,8 +80,8 @@ const App = () => {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
+            Edit <SharedText style={styles.highlight}>App.tsx</SharedText> to
+            change this screen and then come back to see your edits.
           </Section>
           <Section title="See Your Changes">
             <ReloadInstructions />
