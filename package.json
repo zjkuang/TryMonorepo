@@ -1,0 +1,13 @@
+{
+  "private": "true",
+  "name": "try-monorepo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "postinstall": "patch-package"
+  }
+}

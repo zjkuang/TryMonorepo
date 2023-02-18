@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native/react.gradle b/node_modules/react-native/react.gradle
+index 5831d51..001d462 100644
+--- a/node_modules/react-native/react.gradle
++++ b/node_modules/react-native/react.gradle
+@@ -59,7 +59,7 @@ def detectCliPath(config, reactRoot) {
+     }
+ 
+     // 3. cli.js in the root folder
+-    def rootCliJs = new File(reactRoot, "node_modules/react-native/cli.js")
++    def rootCliJs = new File(reactRoot, "../../node_modules/react-native/cli.js")
+     if (rootCliJs.exists()) {
+         return rootCliJs.getAbsolutePath()
+     }
