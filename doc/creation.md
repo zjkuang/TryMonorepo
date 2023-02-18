@@ -1,3 +1,5 @@
+# Create a mobile-app with monorepo
+
 (1) Create and modify `package.json` according to https://www.callstack.com/blog/setting-up-react-native-monorepo-with-yarn-workspaces
 
 (2)
@@ -86,7 +88,6 @@ Now let's fix android. Fix all these files
 `packages/mobile-app/android/build.gradle`
 `packages/mobile-app/android/settings.gradle`
 `packages/mobile-app/android/app/build.gradle`
-``
 by replacing `../node_modules/` with `../../../node_modules/`
 
 For android, we also need to patch react-native.
@@ -113,3 +114,32 @@ and add `"postinstall": "patch-package"` to the root `package.json`:
 And add `patch-package` to `mobile-app`
 `cd packages/mobile-app`
 `yarn add patch-package`
+
+# Create a buddy app
+
+(1)
+`cd packages`
+`npx react-native init buddy --directory buddy-app --template react-native-template-typescript`
+(Notice here the name for the new created app should be different than the previous one(s) to avoid name conflict in the same workspace.)
+
+Fix the `node_modules` relative path in ios `Podfile` and `Project settings` > `Build Phases` open `Bundle React Native code and images` for `budd-app` as we did for `mobile-app`.
+And fix `buddy-app`'s `metro.config.js` as we did for `mobile-app`.
+Then we could `yarn ios` to run `buddy-app`.
+
+Now the android part.
+Fix the `node_modules` relative path for `buddy-app`'s
+`packages/buddy-app/android/build.gradle`
+`packages/buddy-app/android/settings.gradle`
+`packages/buddy-app/android/app/build.gradle`
+as we did for `mobile-app`.
+`node_modules/react-native/react.gradle` was already patched when we were fixing `mobile-app`. But when creating `buddy-app`, the hoisted modules were overwritten so now the local patch is gone.
+We don't need to make the patch for `node_modules/react-native/react.gradle` again,
+  because the `patches/react-native+0.70.6.patch` is still there and the `"postinstall"` entry is still in the root `package.json`.
+But we do need to install `patch-package` for `buddy-app`.
+`cd packages/buddy-app`
+`yarn add patch-package`
+Now we need to remove the whole root `node_modules` folder and reinstall them to apply the patch.
+(Change the work directory to the root, which is packages/..)
+`rm -rf node_modules`
+`yarn`
+Then we could run android and do a recursive test on ios.
