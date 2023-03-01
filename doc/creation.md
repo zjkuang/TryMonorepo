@@ -1,6 +1,24 @@
 # Create a mobile-app with monorepo
 
 (1) Create and modify `package.json` according to https://www.callstack.com/blog/setting-up-react-native-monorepo-with-yarn-workspaces
+`cd github`
+`mkdir TryMonorepo && cd TryMonorepo`
+`yarn init -y`
+`code .` (to open TryMonorepo with VSCode)
+Then modify `package.json` by adding entries `"workspaces"` and `"private"`:
+```
+{
+  "private": "true",
+  "name": "try-monorepo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ]
+}
+```
+And then don't forget to run `yarn`
 
 (2)
 `mkdir packages`
@@ -100,6 +118,7 @@ with
 def rootCliJs = new File(reactRoot, "../../node_modules/react-native/cli.js")
 ```
 After locally modified `node_modules/react-native/react.gradle`,
+ (from the root folder of the monorepo)
 `npx patch-package react-native --include "react.gradle"`
 and add `"postinstall": "patch-package"` to the root `package.json`:
 ```
